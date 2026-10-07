@@ -16,7 +16,7 @@ public abstract class Game {
 
     public abstract void initialize();
     public abstract void update();
-    public abstract void drawOnBuffer(Graphics2D buffer);
+    public abstract void drawOnBuffer(Canvas canvas);
 
     public final void start() {
         engine.start();
@@ -28,7 +28,7 @@ public abstract class Game {
     private void run() {
         while (playing) {
             update();
-            drawOnBuffer(engine.buildBuffer());
+            drawOnBuffer(engine.buildCanvas());
             engine.drawOnScreen();
             sleep();
         }

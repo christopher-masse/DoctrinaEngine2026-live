@@ -32,8 +32,7 @@ public class Ball {
         return bounceCount;
     }
 
-    public void draw(Graphics2D graphics) {
-        graphics.setPaint(Color.RED);
-        graphics.fillOval(positionX, positionY, DIAMETER, DIAMETER);
+    public void draw(Canvas canvas) {
+        canvas.drawCircle(positionX, positionY, DIAMETER, Color.RED);
     }
 }

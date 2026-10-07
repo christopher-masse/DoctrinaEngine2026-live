@@ -17,20 +17,18 @@ public final class BouncingBallGame extends Game {
     }
 
     @Override
-    public void drawOnBuffer(Graphics2D buffer) {
-        drawBackground(buffer);
-        drawScore(buffer);
+    public void drawOnBuffer(Canvas canvas) {
+        drawBackground(canvas);
+        drawScore(canvas);
 
-        ball.draw(buffer);
+        ball.draw(canvas);
     }
 
-    private void drawBackground(Graphics2D graphics) {
-        graphics.setPaint(Color.BLUE);
-        graphics.fillRect(0,0, getWidth(), getHeight());
+    private void drawBackground(Canvas canvas) {
+        canvas.drawRectangle(0,0, getWidth(), getHeight(), Color.BLUE);
     }
 
-    private void drawScore(Graphics2D graphics) {
-        graphics.setPaint(Color.WHITE);
-        graphics.drawString("Score: " + score, 10, 20);
+    private void drawScore(Canvas canvas) {
+        canvas.drawString(10, 20, "Score: " + score,  Color.WHITE);
     }
 }

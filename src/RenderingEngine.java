@@ -37,12 +37,12 @@ public class RenderingEngine {
         mainFrame.setVisible(true);
     }
 
-    public Graphics2D buildBuffer() {
+    public Canvas buildCanvas() {
         bufferedImage = new BufferedImage(WINDOW_WIDTH, WINDOW_HEIGHT,
                 BufferedImage.TYPE_INT_RGB);
         Graphics2D bufferEngine = bufferedImage.createGraphics();
         bufferEngine.setRenderingHints(buildRenderingHints());
-        return bufferEngine;
+        return new Canvas(bufferEngine);
     }
 
     private RenderingHints buildRenderingHints() {
