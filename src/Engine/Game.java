@@ -1,5 +1,7 @@
 package Engine;
 
+import java.awt.event.KeyListener;
+
 public abstract class Game {
 
     private boolean playing = true;
@@ -29,6 +31,10 @@ public abstract class Game {
             engine.drawOnScreen();
             gameTime.synchronize();
         }
+    }
+
+    public void addKeyListener(KeyListener keyListener) {
+        engine.addKeyListener(keyListener);
     }
 
     public int getWidth() {

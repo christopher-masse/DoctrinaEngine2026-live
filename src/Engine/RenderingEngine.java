@@ -2,6 +2,7 @@ package Engine;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
@@ -24,6 +25,10 @@ public class RenderingEngine {
         mainPanel.setFocusable(true);
         mainPanel.setDoubleBuffered(true);
         mainFrame.add(mainPanel);
+    }
+
+    public void addKeyListener(KeyListener keyListener) {
+        mainPanel.addKeyListener(keyListener);
     }
 
     private void initializeFrame() {
