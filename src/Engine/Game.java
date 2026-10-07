@@ -2,11 +2,9 @@ package Engine;
 
 public abstract class Game {
 
-    private final int SLEEP = 25;
     private boolean playing = true;
-
-    private long lastUpdate = System.currentTimeMillis();
     private RenderingEngine engine;
+    private GameTime gameTime;
 
     public Game() {
         engine = new RenderingEngine();
@@ -24,23 +22,13 @@ public abstract class Game {
     }
 
     private void run() {
+        gameTime = new GameTime();
         while (playing) {
             update();
             drawOnBuffer(engine.buildCanvas());
             engine.drawOnScreen();
-            sleep();
+            gameTime.sleep();
         }
-    }
-
-    private void sleep() {
-        long sleepTime = SLEEP - (System.currentTimeMillis() - lastUpdate);
-        sleepTime = Math.max(sleepTime, 4);
-        try {
-            Thread.sleep(sleepTime);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        lastUpdate = System.currentTimeMillis();
     }
 
     public int getWidth() {
@@ -49,5 +37,9 @@ public abstract class Game {
 
     public int getHeight() {
         return engine.getHeight();
+    }
+
+    public String getElapsedTime() {
+        return gameTime.getElapsedFormattedTime();
     }
 }

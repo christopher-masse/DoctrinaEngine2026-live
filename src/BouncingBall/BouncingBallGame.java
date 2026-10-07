@@ -25,6 +25,7 @@ public final class BouncingBallGame extends Game {
     public void drawOnBuffer(Engine.Canvas canvas) {
         drawBackground(canvas);
         drawScore(canvas);
+        drawTimer(canvas);
 
         ball.draw(canvas);
     }
@@ -35,5 +36,9 @@ public final class BouncingBallGame extends Game {
 
     private void drawScore(Canvas canvas) {
         canvas.drawString(10, 20, "Score: " + score,  Color.WHITE);
+    }
+
+    private void drawTimer(Canvas canvas) {
+        canvas.drawString(getWidth()-100, 20, "Time: " + getElapsedTime(), Color.WHITE);
     }
 }
