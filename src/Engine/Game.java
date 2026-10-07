@@ -27,7 +27,7 @@ public abstract class Game {
             update();
             drawOnBuffer(engine.buildCanvas());
             engine.drawOnScreen();
-            gameTime.sleep();
+            gameTime.synchronize();
         }
     }
 
@@ -41,5 +41,9 @@ public abstract class Game {
 
     public String getElapsedTime() {
         return gameTime.getElapsedFormattedTime();
+    }
+
+    public int getFps() {
+        return gameTime.getCurrentFps();
     }
 }

@@ -3,9 +3,12 @@ package Engine;
 import java.util.concurrent.TimeUnit;
 
 public class GameTime {
-    private final int SLEEP = 25;
+    private final int FPS_TARGET = 60;
     private long syncTime;
     private final long gameStartTime;
+    private int currentFps;
+    private int fpsCount;
+    private long lastSecond;
 
     public GameTime() {
         syncTime = getCurrentTime();
@@ -30,7 +33,7 @@ public class GameTime {
         return String.format("%02d:%02d:%02d", hours, minutes, seconds);
     }
 
-    public void sleep() {
+    private void sleep() {
         try {
             Thread.sleep(getSleepTime());
         } catch (InterruptedException e) {
@@ -39,8 +42,34 @@ public class GameTime {
     }
 
     private long getSleepTime() {
-        long sleepTime = SLEEP - (getCurrentTime() - syncTime);
-        syncTime = getCurrentTime();
+        long targetTime = 1000 / FPS_TARGET;
+        long sleepTime = targetTime - (getCurrentTime() - syncTime);
         return Math.max(sleepTime, 4);
+    }
+
+    public void synchronize() {
+        update();
+        sleep();
+        synchronizeTime();
+    }
+
+    private void synchronizeTime() {
+        syncTime = getCurrentTime();
+    }
+
+
+    private void update() {
+        fpsCount++;
+        long currentSecond = TimeUnit.MILLISECONDS.toSeconds(getElapsedTime());
+
+        if (currentSecond != lastSecond) {
+            currentFps = fpsCount;
+            fpsCount = 0;
+        }
+        lastSecond = currentSecond;
+    }
+
+    public int getCurrentFps() {
+        return (currentFps > 0) ? currentFps : fpsCount;
     }
 }

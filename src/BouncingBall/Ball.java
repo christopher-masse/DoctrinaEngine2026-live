@@ -7,8 +7,8 @@ import java.awt.*;
 public class Ball {
     private int positionX = 200;
     private int positionY = 150;
-    private int velocityX = 5;
-    private int velocityY = 3;
+    private int velocityX = 3;
+    private int velocityY = 1;
     private final int DIAMETER = 50;
     private final int maxBallWidth;
     private final int maxBallHeight;
