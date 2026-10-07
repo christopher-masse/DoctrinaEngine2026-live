@@ -1,3 +1,8 @@
+package BouncingBall;
+
+import Engine.Canvas;
+import Engine.Game;
+
 import java.awt.*;
 
 public final class BouncingBallGame extends Game {
@@ -17,14 +22,14 @@ public final class BouncingBallGame extends Game {
     }
 
     @Override
-    public void drawOnBuffer(Canvas canvas) {
+    public void drawOnBuffer(Engine.Canvas canvas) {
         drawBackground(canvas);
         drawScore(canvas);
 
         ball.draw(canvas);
     }
 
-    private void drawBackground(Canvas canvas) {
+    private void drawBackground(Engine.Canvas canvas) {
         canvas.drawRectangle(0,0, getWidth(), getHeight(), Color.BLUE);
     }
 

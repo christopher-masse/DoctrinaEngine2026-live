@@ -1,6 +1,4 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
+package Engine;
 
 public abstract class Game {
 

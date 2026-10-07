@@ -1,3 +1,7 @@
+package BouncingBall;
+
+import Engine.Canvas;
+
 import java.awt.*;
 
 public class Ball {
