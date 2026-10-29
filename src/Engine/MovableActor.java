@@ -112,7 +112,7 @@ public abstract class MovableActor extends StaticActor {
     }
 
     public void moveRight() {
-        if (x <= maxHeight-width) {
+        if (x <= maxWidth-width) {
             move(Direction.RIGHT);
         }
     }
