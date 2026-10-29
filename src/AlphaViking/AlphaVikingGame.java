@@ -15,7 +15,12 @@ public class AlphaVikingGame extends Game {
         addKeyListener(gamePad);
         player = new Player(gamePad, getWidth(), getHeight());
         world = new World();
+        loadAssets();
+    }
+
+    private void loadAssets() {
         world.load();
+        player.load();
     }
 
     @Override
