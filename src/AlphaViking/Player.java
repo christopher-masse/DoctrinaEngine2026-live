@@ -2,6 +2,7 @@ package AlphaViking;
 
 import Engine.Canvas;
 import Engine.ControllableActor;
+import Engine.Direction;
 import Engine.MovementController;
 
 import javax.imageio.ImageIO;
@@ -11,12 +12,16 @@ import java.io.IOException;
 
 public class Player extends ControllableActor {
     private static final String SPRITE_PATH = "images/player.png";
+    private static final int ANIMATION_SPEED = 12;
 
     private BufferedImage spriteSheet;
     private Image[] rightFrames;
     private Image[] leftFrames;
     private Image[] upFrames;
     private Image[] downFrames;
+
+    private int updateAnimationFrame = ANIMATION_SPEED;
+    private int currentAnimationFrame = 1;
 
     public Player(MovementController controller, int maxWidth, int maxHeight) {
         super(controller, maxWidth, maxHeight);
@@ -61,11 +66,34 @@ public class Player extends ControllableActor {
 
     @Override
     public void update() {
+        super.update();
         moveWithController();
+
+        if (hasMoved()) {
+            updateAnimationFrame--;
+            if (updateAnimationFrame == 0) {
+                currentAnimationFrame++;
+                if (currentAnimationFrame >= 3) {
+                    currentAnimationFrame = 0;
+                }
+                updateAnimationFrame = ANIMATION_SPEED;
+            }
+        } else {
+            currentAnimationFrame = 1;
+        }
+
     }
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawImage(downFrames[1], x, y);
+        if (getDirection() == Direction.UP) {
+            canvas.drawImage(upFrames[currentAnimationFrame], x, y);
+        } else if (getDirection() == Direction.DOWN) {
+            canvas.drawImage(downFrames[currentAnimationFrame], x, y);
+        } else if (getDirection() == Direction.LEFT) {
+            canvas.drawImage(leftFrames[currentAnimationFrame], x, y);
+        } else if (getDirection() == Direction.RIGHT) {
+            canvas.drawImage(rightFrames[currentAnimationFrame], x, y);
+        }
     }
 }

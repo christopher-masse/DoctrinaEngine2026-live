@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 public class RenderingEngine {
     private final int WINDOW_WIDTH = 800;
-    private final int WINDOW_HEIGHT = 600;
+    private final int WINDOW_HEIGHT = 536;
 
     private JFrame mainFrame;
     private JPanel mainPanel;

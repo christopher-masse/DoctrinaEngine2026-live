@@ -10,13 +10,23 @@ public abstract class MovableActor extends StaticActor {
 
     private Direction direction = Direction.UP;
 
+    private int lastX = Integer.MAX_VALUE;
+    private int lastY = Integer.MAX_VALUE;
+    private boolean moved = false;
+
     public MovableActor(int maxWidth, int maxHeight) {
         this.maxHeight = maxHeight;
         this.maxWidth = maxWidth;
         collision = new Collision(this);
     }
 
-    public abstract void update();
+    public void update() {
+        moved = false;
+    }
+
+    public boolean hasMoved() {
+        return moved;
+    }
 
     public int getSpeed() {
         return speed;
@@ -62,6 +72,9 @@ public abstract class MovableActor extends StaticActor {
         int allowedSpeed = collision.getAllowedSpeed(direction);
         x = x + direction.calculateVelocityX(allowedSpeed);
         y = y + direction.calculateVelocityY(allowedSpeed);
+        moved = (x != lastX || y != lastY);
+        lastX = x;
+        lastY = y;
     }
 
     public void move(Direction direction) {
