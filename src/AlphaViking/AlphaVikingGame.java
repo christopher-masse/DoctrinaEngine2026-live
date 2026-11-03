@@ -21,6 +21,11 @@ public class AlphaVikingGame extends Game {
         world = new World();
         tree = new Tree(300, 350);
         loadAssets();
+        startBackgroundMusic();
+    }
+
+    private void startBackgroundMusic() {
+        SoundEffects.MUSIC.loop();
     }
 
     private void loadAssets() {
@@ -41,20 +46,9 @@ public class AlphaVikingGame extends Game {
 
         if (gamePad.isFirePressed() && cooldown == 0) {
             cooldown = 100;
-            try {
-                Clip clip = AudioSystem.getClip();
-                AudioInputStream stream = AudioSystem.getAudioInputStream(
-                        this.getClass().getClassLoader()
-                                .getResourceAsStream("audios/fire.wav")
-                );
-                clip.open(stream);
-                FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-                volume.setValue(-20f);
-                clip.start();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
+            SoundEffects.FIRE.play();
+        } else if (gamePad.isFirePressed()) {
+            SoundEffects.MURLOC.play();
         }
 
         player.update();

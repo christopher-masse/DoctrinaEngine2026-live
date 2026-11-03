@@ -9,13 +9,13 @@ public class RenderingEngine {
     private final int WINDOW_WIDTH = 800;
     private final int WINDOW_HEIGHT = 536;
 
-    private JFrame mainFrame;
     private JPanel mainPanel;
+    private Screen screen;
 
     private BufferedImage bufferedImage;
 
     public RenderingEngine() {
-        initializeFrame();
+        initializeScreen();
         initializePanel();
     }
 
@@ -24,25 +24,20 @@ public class RenderingEngine {
         mainPanel.setBackground(Color.BLUE);
         mainPanel.setFocusable(true);
         mainPanel.setDoubleBuffered(true);
-        mainFrame.add(mainPanel);
+        screen.setPanel(mainPanel);
     }
 
     public void addKeyListener(KeyListener keyListener) {
         mainPanel.addKeyListener(keyListener);
     }
 
-    private void initializeFrame() {
-        mainFrame = new JFrame();
-        mainFrame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setResizable(false);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setState(JFrame.NORMAL);
-        mainFrame.setUndecorated(true);
+    private void initializeScreen() {
+        screen = new Screen();
+        screen.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     }
 
     public void start() {
-        mainFrame.setVisible(true);
+        screen.start();
     }
 
     public Canvas buildCanvas() {
@@ -78,8 +73,7 @@ public class RenderingEngine {
     }
 
     public void stop() {
-        mainFrame.setVisible(false);
-        mainFrame.dispose();
+        screen.stop();
     }
 
 }
