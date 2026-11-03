@@ -57,4 +57,16 @@ public abstract class Game {
     public int getFps() {
         return gameTime.getCurrentFps();
     }
+
+    public void fullScreen() {
+        engine.fullScreen();
+    }
+
+    public void windowed() {
+        engine.windowed();
+    }
+
+    public boolean isFullScreen() {
+        return engine.isFullScreen();
+    }
 }

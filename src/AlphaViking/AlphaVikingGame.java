@@ -22,6 +22,8 @@ public class AlphaVikingGame extends Game {
         tree = new Tree(300, 350);
         loadAssets();
         startBackgroundMusic();
+
+        fullScreen();
     }
 
     private void startBackgroundMusic() {
@@ -38,6 +40,14 @@ public class AlphaVikingGame extends Game {
     public void update() {
         if (gamePad.isQuitPressed()) {
             stop();
+        }
+
+        if (gamePad.isFullScreenPressed()) {
+            if (isFullScreen()) {
+                windowed();
+            } else {
+                fullScreen();
+            }
         }
 
         if (cooldown > 0) {

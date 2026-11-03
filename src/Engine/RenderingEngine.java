@@ -68,7 +68,11 @@ public class RenderingEngine {
     public void drawOnScreen() {
         Graphics2D graphics = (Graphics2D) mainPanel.getGraphics();
 
-        graphics.drawImage(bufferedImage, 0, 0, mainPanel);
+        graphics.drawImage(bufferedImage, 0, 0,
+                screen.getWidth(), screen.getHeight(),
+                0,0,
+                bufferedImage.getWidth(), bufferedImage.getHeight(),
+                null);
         graphics.dispose();
     }
 
@@ -76,4 +80,15 @@ public class RenderingEngine {
         screen.stop();
     }
 
+    public void fullScreen() {
+        screen.fullScreen();
+    }
+
+    public void windowed() {
+        screen.windowed();
+    }
+
+    public boolean isFullScreen() {
+        return screen.isFullScreen();
+    }
 }
